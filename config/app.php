@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // Default product image path
+    'default_product_image' => env('DEFAULT_PRODUCT_IMAGE', 'images/default_product_image.png'),
 ];
