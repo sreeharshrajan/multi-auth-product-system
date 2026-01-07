@@ -5,7 +5,13 @@
                 <h2 class="text-2xl font-black tracking-tight">Products</h2>
                 <p class="text-sm text-base-content/60">Manage your catalog, stock levels, and pricing</p>
             </div>
-            <div>
+            <div class="flex gap-2">
+                <a href="{{ route('admin.products.import') }}" class="btn btn-secondary shadow-md shadow-secondary/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v16h16V4H4zm4 4h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z" />
+                    </svg>
+                    Bulk Import
+                </a>
                 <a href="{{ route('admin.products.create') }}" class="btn btn-primary shadow-md shadow-primary/20">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
