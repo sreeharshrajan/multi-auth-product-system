@@ -43,7 +43,7 @@
                 <div class="flex-none">
                     <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost">
-                            <div>{{ Auth::user() }}</div>
+                            <div>{{ Auth::guard('admin')->user()->name }}</div>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
@@ -55,7 +55,7 @@
                         </div>
                         <ul tabindex="0"
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="{{ route('admin.login') }}">Profile</a></li>
+                            <li><a href="#">Profile</a></li>
                             <li>
                                 <form method="POST" action="{{ route('admin.logout') }}">
                                     @csrf
