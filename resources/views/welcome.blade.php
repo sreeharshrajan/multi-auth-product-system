@@ -34,16 +34,18 @@
         <!-- Content -->
         <div class="hero-content text-neutral-content text-center relative z-10">
             <div>
-                <h1 class="mb-5 text-5xl font-bold">Product Management System</h1>
+                <h1 class="mb-5 text-5xl font-bold">{{ config('app.name') }}</h1>
                 <p class="mb-5 max-w-lg mx-auto">
                     This application demonstrates a production-ready Laravel architecture featuring
                     multi-authentication, large-scale queued product imports, and real-time user presence using
                     WebSockets.
                 </p>
-                <button class="btn btn-primary">Get Started</button>
+                <a href="{{ route('products.index') }}" class="btn btn-primary">Get Started</a>
             </div>
         </div>
     </div>
+
+    <x-footer />
 
     @if (Route::has('login'))
         <div class="h-14.5 hidden lg:block"></div>

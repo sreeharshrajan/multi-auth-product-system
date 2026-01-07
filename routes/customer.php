@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\DashboardController;
 use App\Http\Controllers\Customer\AuthController;
-
+use App\Http\Controllers\Customer\ProductController;
 
 // Guest routes (for non-authenticated customers)
 Route::middleware('customer.guest')->group(function () {
@@ -12,6 +12,7 @@ Route::middleware('customer.guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('customer.login.submit');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('customer.register');
     Route::post('/register', [AuthController::class, 'register'])->name('customer.register.submit');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 });
 
 // Authenticated customer routes
