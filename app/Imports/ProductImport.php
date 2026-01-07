@@ -25,7 +25,7 @@ class ProductImport implements OnEachRow, WithHeadingRow
                 'description' => $row['description'] ?? null,
                 'price' => $row['price'] ?? null,
                 'stock' => $row['stock'] ?? 0,
-                'image' => $row['image'] ?? null,
+                'image' => $row['image'] ?? config('app.default_product_image'),
                 'is_active' => $row['is_active'] ?? 1,
             ]
         );
