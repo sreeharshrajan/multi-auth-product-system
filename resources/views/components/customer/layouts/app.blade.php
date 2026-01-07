@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Admin Panel' }}</title>
+    <title>{{ $title ?? 'Customer Panel' }}</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -17,7 +17,6 @@
 
     @stack('styles')
 </head>
-
 
 <body class="min-h-screen font-sans antialiased">
     <div class="drawer lg:drawer-open">
@@ -40,7 +39,7 @@
                 <div class="flex-none">
                     <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost">
-                            <div>{{ Auth::user() }}</div>
+                            <div>{{ Auth::guard('customer')->user()->name }}</div>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
@@ -52,11 +51,11 @@
                         </div>
                         <ul tabindex="0"
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="{{ route('admin.login') }}">Profile</a></li>
+                            <li><a href="#">Profile</a></li>
                             <li>
-                                <form method="POST" action="{{ route('admin.logout') }}">
+                                <form method="POST" action="{{ route('customer.logout') }}">
                                     @csrf
-                                    <a href="{{ route('admin.logout') }}"
+                                    <a href="{{ route('customer.logout') }}"
                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                         Log Out
@@ -79,7 +78,7 @@
             @endisset
 
             <!-- Page content here -->
-            <main class="py-6 px-4 sm:px-6 lg:px-8 flex-grow">
+            <main class="p-4 flex-grow">
                 {{ $slot }}
             </main>
         </div>
@@ -91,7 +90,7 @@
                 <ul class="menu w-full grow">
                     <!-- List item -->
                     <li>
-                        <a href="{{ route('admin.dashboard') }}"
+                        <a href="{{ route('customer.dashboard') }}"
                             class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
                             <!-- Home icon -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round"
