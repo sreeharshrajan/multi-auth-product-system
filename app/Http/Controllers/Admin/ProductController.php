@@ -11,10 +11,22 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(15); // or any per-page value
-        return view('admin.products.index', compact('products'));
+        $products = Product::query();
+
+        if ($request->filled('filter')) {
+            $filter = $request->get('filter');
+            if ($filter === 'low_stock') {
+                $products->where('stock', '<=', 10);
+            } elseif ($filter === 'out_of_stock') {
+                $products->where('stock', '=', 0);
+            }
+        }
+
+        $products = $products->paginate(perPage: 15);
+        $totalProducts = Product::count();
+        return view('admin.products.index', compact('products', 'totalProducts'));
     }
 
     public function create()
