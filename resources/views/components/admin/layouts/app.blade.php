@@ -9,7 +9,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -103,6 +106,21 @@
                                 </path>
                             </svg>
                             <span class="is-drawer-close:hidden">Homepage</span>
+                        </a>
+                    </li>
+
+                    <!-- Products -->
+                    <li>
+                        <a href="{{ route('admin.products.index') }}"
+                            class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Products">
+                            <!-- Products icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round"
+                                stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"
+                                class="my-1.5 inline-block size-4">
+                                <rect x="3" y="7" width="18" height="13" rx="2" />
+                                <path d="M16 3v4M8 3v4M3 11h18" />
+                            </svg>
+                            <span class="is-drawer-close:hidden">Products</span>
                         </a>
                     </li>
 

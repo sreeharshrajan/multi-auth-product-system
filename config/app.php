@@ -124,5 +124,5 @@ return [
     ],
 
     // Default product image path
-    'default_product_image' => env('DEFAULT_PRODUCT_IMAGE', 'images/default_product_image.png'),
+    'default_product_image' => env('DEFAULT_PRODUCT_IMAGE', 'assets/images/default_product_image.png'),
 ];

@@ -1,15 +1,14 @@
-    <div class="stat">
+    <div class="stat hover:shadow transition duration-300">
         <div class="stat-figure text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                class="inline-block h-8 w-8 stroke-current">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                </path>
-            </svg>
+            @if (isset($icon))
+                <span class="icon flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg">
+                    <i class="ph ph-{{ $icon }} text-2xl"></i>
+                </span>
+            @endif
         </div>
-        <div class="stat-title">{{$title}}</div>
-        <div class="stat-value text-primary">{{$value}}</div>
-        <div class="stat-desc">21% more than last month</div>
+        <div class="stat-title text-base">{{ $title }}</div>
+        <div class="stat-value text-primary">{{ $value }}</div>
+        @if (isset($description))
+            <div class="stat-desc">{{ $description }}</div>
+        @endif
     </div>
-
-   

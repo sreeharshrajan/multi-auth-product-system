@@ -8,9 +8,12 @@
             <h3> Welcome back, <strong>{{ Auth::guard('admin')->user()->name }}</strong>!</h3>
         </div>
     </div>
-    
+
     <div class="stats shadow mt-6">
-        <x-admin.dashboard.stats-card title="Total Products" :value="$totalProducts ?? 0" />
+        <x-admin.dashboard.stats-card title="Total Products" :value="$totalProducts ?? 0" icon="warehouse" />
+        <x-admin.dashboard.stats-card title="Active Products" :value="$activeProducts ?? 0" icon="tote" />
+        <x-admin.dashboard.stats-card title="Total Customers" :value="$totalCustomers ?? 0" icon="user" />
+        <x-admin.dashboard.stats-card title="Total Orders" :value="$totalOrders ?? 0" icon="shopping-cart" />
     </div>
 
 </x-admin.layouts.app>

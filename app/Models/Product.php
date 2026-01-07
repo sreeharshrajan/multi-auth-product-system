@@ -29,13 +29,6 @@ class Product extends Model
         'stock' => 'integer',
     ];
 
-    /**
-     * Default image accessor.
-     */
-    public function getImageAttribute($value): string
-    {
-        return $value ?: config('app.default_product_image', 'images/default_product_image.png');
-    }
 
     /**
      * Scope: Only in-stock products.
