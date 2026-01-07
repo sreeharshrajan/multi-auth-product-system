@@ -46,6 +46,15 @@
                     <button type="submit" class="btn btn-primary w-full mt-3">
                         Login
                     </button>
+
+                    <div>
+                        <p class="text-sm text-center text-base-content/70">
+                            Don't have an account?
+                            <a href="{{ route('customer.register') }}" class="link link-primary font-semibold">
+                                Register here
+                            </a>
+                        </p>
+                    </div>
                 </form>
 
                 <p class="text-center text-xs text-base-content/50 mt-6">
