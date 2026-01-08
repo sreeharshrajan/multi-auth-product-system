@@ -124,6 +124,20 @@
                         </a>
                     </li>
 
+                    {{-- Customers --}}
+                    <li>
+                        <a href="{{ route('admin.customers.index') }}"
+                            class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Customers">
+                            <!-- Customers icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round"
+                                stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"
+                                class="my-1.5 inline-block size-4">
+                                <circle cx="12" cy="7" r="4"></circle>
+                                <path d="M5.5 21h13a2.5 2.5 0 0 0-13 0z"></path>
+                            </svg>
+                            <span class="is-drawer-close:hidden">Customers</span>
+                        </a>
+                    </li>
                     <!-- List item -->
                     <li>
                         <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

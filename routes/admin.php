@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ProductImportController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductImportController;
 
 
 /*
@@ -35,5 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/products/import', [ProductImportController::class, 'showImportForm'])->name('products.import');
         Route::post('/products/import', [ProductImportController::class, 'import'])->name('products.import.submit');
         Route::resource('products', ProductController::class);
+
+        //Customer management routes
+        Route::resource('customers', CustomerController::class);
     });
 });

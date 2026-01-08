@@ -58,4 +58,13 @@ class Customer extends Authenticatable
     {
         return $this->morphOne(UserPresenceLog::class, 'user');
     }
+
+
+    /**
+     * This ensures updates are broadcasted to a specific channel
+     */
+    public function broadcastOn($event)
+    {
+        return ['customers'];
+    }
 }
