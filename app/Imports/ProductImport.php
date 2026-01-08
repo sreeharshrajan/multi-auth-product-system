@@ -36,7 +36,8 @@ class ProductImport implements
         $now = now();
         $payload = [];
 
-        foreach ($rows as  $index => $row) {
+        foreach ($rows as $index => $row) {
+
             if ($row->filter()->isEmpty()) {
                 continue;
             }
@@ -49,7 +50,7 @@ class ProductImport implements
                 continue;
             }
 
-            $data[] = [
+            $data = [
                 'name'        => trim($row['name'] ?? ''),
                 'category'    => trim($row['category'] ?? ''),
                 'price'       => $row['price'] ?? null,
@@ -60,22 +61,22 @@ class ProductImport implements
 
             /** Row-level validation */
             $validator = Validator::make($data, [
-                'name'      => 'required|string|max:255',
-                'category'  => 'required|string|max:255',
-                'price'     => 'required|numeric|min:0',
-                'stock'     => 'nullable|integer|min:0',
-                'image'     => 'nullable|string|max:255',
+                'name'     => 'required|string|max:255',
+                'category' => 'required|string|max:255',
+                'price'    => 'required|numeric|min:0',
+                'stock'    => 'nullable|integer|min:0',
+                'image'    => 'nullable|string|max:255',
             ]);
 
             if ($validator->fails()) {
                 Log::warning('Product import row failed validation', [
-                    'row_number' => $index + 2, // Excel row number
+                    'row_number' => $index + 2, // Match with excel row number
                     'errors'     => $validator->errors()->toArray(),
                     'row'        => $row->toArray(),
                 ]);
-
-                continue; // Skip invalid row
+                continue; // Skip invalid rows
             }
+
             $payload[] = [
                 ...$data,
                 'price'      => (float) $data['price'],
@@ -85,6 +86,7 @@ class ProductImport implements
                 'updated_at' => $now,
             ];
         }
+
 
         if (! empty($payload)) {
             Product::upsert(
