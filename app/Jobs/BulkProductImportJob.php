@@ -2,27 +2,28 @@
 
 namespace App\Jobs;
 
-use App\Models\Product;
 use Illuminate\Bus\Queueable;
+use App\Imports\ProductImport;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Log;
 
 class BulkProductImportJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $filePath;
+    protected string $filePath;
 
     /**
      * Create a new job instance.
      *
      * @param string $filePath
      */
-    public function __construct($filePath)
+    public function __construct(string $filePath)
     {
         $this->filePath = $filePath;
     }
@@ -32,12 +33,20 @@ class BulkProductImportJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         try {
-            Excel::import(new \App\Imports\ProductImport, $this->filePath);
-        } catch (\Exception $e) {
-            Log::error('Bulk product import failed: ' . $e->getMessage());
+            Excel::import(
+                new ProductImport,
+                Storage::path($this->filePath)
+            );
+        } catch (\Throwable $e) {
+            Log::error('Bulk product import failed', [
+                'file' => $this->filePath,
+                'error' => $e->getMessage(),
+            ]);
+            //Retry
+            throw $e;
         }
     }
 }

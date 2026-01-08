@@ -12,8 +12,9 @@ Route::middleware('customer.guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('customer.login.submit');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('customer.register');
     Route::post('/register', [AuthController::class, 'register'])->name('customer.register.submit');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 });
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 // Authenticated customer routes
 Route::middleware('customer.auth')->group(function () {

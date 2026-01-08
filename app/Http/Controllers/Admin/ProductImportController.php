@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Throwable;
 use Illuminate\Http\Request;
-use App\Jobs\BulkProductImportJob;
-use Illuminate\Support\Facades\Storage;
+use App\Imports\ProductImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\ProductImportRequest;
 
 class ProductImportController extends Controller
 {
@@ -14,15 +16,21 @@ class ProductImportController extends Controller
         return view('admin.products.import');
     }
 
-    public function import(Request $request)
+    public function import(ProductImportRequest $request)
     {
-        $request->validate([
-            'file' => 'required|file|mimes:xlsx,csv,xls',
-        ]);
+        try {
+            // Store the uploaded file temporarily
+            $path = $request->file('file')->store('imports');
 
-        $path = $request->file('file')->store('imports');
-        BulkProductImportJob::dispatch($path);
+            // Queue the import job
+            Excel::queueImport(
+                new ProductImport,
+                $request->file('file')
+            );
 
-        return back()->with('success', 'Bulk product import has been queued.');
+            return back()->with('success', 'Bulk product import has been queued.');
+        } catch (Throwable $e) {
+            return back()->withErrors(['file' => 'There was an error processing the file: ' . $e->getMessage()]);
+        }
     }
 }

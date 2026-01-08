@@ -27,7 +27,7 @@
 
     <div class="card-body p-6 gap-0">
         <div class="flex justify-between items-baseline mb-3">
-            <h2 class="text-2xl font-black text-base-content tracking-tighter uppercase leading-none">
+            <h2 class="text-2xl font-black text-base-content line-clamp-2 tracking-tighter leading-none">
                 {{ $product->name }}
             </h2>
         </div>
