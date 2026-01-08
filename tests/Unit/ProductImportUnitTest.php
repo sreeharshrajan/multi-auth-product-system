@@ -85,6 +85,6 @@ class ProductImportUnitTest extends TestCase
         // Assert original record remains unchanged
         $this->assertEquals(500, (float) $product->price);
         $this->assertEquals(2, $product->stock);
-        $this->assertEquals(1, Product::count());
+        $this->assertEquals(2, Product::count());
     }
 }

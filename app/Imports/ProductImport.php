@@ -21,6 +21,8 @@ class ProductImport implements
     WithHeadingRow,
     ShouldQueue
 {
+    protected static int $chunk = 0;
+
     public function startRow(): int
     {
         return 2;
@@ -33,6 +35,17 @@ class ProductImport implements
 
     public function collection(Collection $rows): void
     {
+        self::$chunk++;
+
+        $chunkNumber = self::$chunk;
+        $rowCount = $rows->count();
+
+        Log::info('Product import chunk started', [
+            'chunk'     => $chunkNumber,
+            'rows'      => $rowCount,
+            'memory_mb' => round(memory_get_usage(true) / 1024 / 1024, 2),
+        ]);
+
         $now = now();
         $payload = [];
 
@@ -87,6 +100,7 @@ class ProductImport implements
             ];
         }
 
+        $start = microtime(true);
 
         if (! empty($payload)) {
             Product::upsert(
@@ -95,5 +109,11 @@ class ProductImport implements
                 ['price', 'description', 'stock', 'image', 'is_active', 'updated_at']
             );
         }
+
+        Log::info('Product import chunk completed', [
+            'chunk'      => $chunkNumber,
+            'rows'       => $rowCount,
+            'duration_s' => round(microtime(as_float: true) - $start, 2),
+        ]);
     }
 }
